@@ -71,10 +71,13 @@
   <ItemGroup>
     <Compile Include="ApprovalTest.cs" />
     <Compile Include="ExpiredProductStrategyTests\AgedItemExpiredProductStrategyTests.cs" />
+    <Compile Include="ExpiredProductStrategyTests\ConjuredExpiredProductStrategyTests.cs" />
     <Compile Include="ExpiredProductStrategyTests\DefaultExpiredProductStrategyTests.cs" />
     <Compile Include="ExpiredProductStrategyTests\EventTicketExpiredProductStrategyTests.cs" />
     <Compile Include="ExpiredProductStrategyTests\NullExpiredProductStrategyTests.cs" />
     <Compile Include="GildedRoseTest.cs" />
+    <Compile Include="ProductCommonTests.cs" />
+    <Compile Include="ProductConjuredTests.cs" />
     <Compile Include="ProductEventTicketTests.cs" />
     <Compile Include="ProductAgedItemTests.cs" />
     <Compile Include="ProductExpiredTests.cs" />
@@ -92,6 +95,9 @@
       <Project>{176c0214-9136-4079-8dab-11d7420c3881}</Project>
       <Name>csharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApprovalTest.ThirtyDays.approved.txt" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

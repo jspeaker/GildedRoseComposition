@@ -4,7 +4,7 @@
     {
         private readonly IExpiredProductStrategy _nextStrategy;
 
-        public EventTicketExpiredProductStrategy() : this(new DefaultExpiredProductStrategy()) { }
+        public EventTicketExpiredProductStrategy() : this(new ConjuredExpiredProductStrategy()) { }
 
         public EventTicketExpiredProductStrategy(IExpiredProductStrategy nextStrategy)
         {

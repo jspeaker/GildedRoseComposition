@@ -4,6 +4,8 @@
     {
         public IProduct Expired(IProduct product)
         {
+            if (product.Item().SellIn > -1) return product;
+
             return new Product(new Item
             {
                 Name = product.Item().Name,

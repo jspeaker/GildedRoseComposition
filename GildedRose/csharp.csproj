@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpiredProductStrategies\ConjuredExpiredProductStrategy.cs" />
     <Compile Include="ExpiredProductStrategies\DefaultExpiredProductStrategy.cs" />
     <Compile Include="ExpiredProductStrategies\EventTicketExpiredProductStrategy.cs" />
     <Compile Include="ExpiredProductStrategies\IExpiredProductStrategy.cs" />

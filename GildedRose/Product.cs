@@ -1,4 +1,5 @@
-﻿using csharp.ExpiredProductStrategies;
+﻿using System;
+using csharp.ExpiredProductStrategies;
 
 namespace csharp
 {
@@ -18,6 +19,17 @@ namespace csharp
         public IProduct WithReducedQuality()
         {
             if (_item.Quality < 1) return this;
+
+            if (Conjured())
+            {
+                return new Product(new Item
+                {
+                    Name = _item.Name,
+                    Quality = _item.Quality - 2,
+                    SellIn = _item.SellIn
+                });
+            }
+
             if (!Common()) return this;
 
             return new Product(new Item
@@ -32,6 +44,7 @@ namespace csharp
         {
             if (Common() && Quality() > 0) return this;
             if (Quality() >= 50) return this;
+            if (Conjured()) return this;
 
             return new Product(new Item
             {
@@ -87,22 +100,27 @@ namespace csharp
 
         public bool Common()
         {
-            return !Legendary() && !AgedItem() && !EventTicket();
+            return !Legendary() && !AgedItem() && !EventTicket() && !Conjured();
         }
 
         public bool Legendary()
         {
-            return _item.Name.Equals("Sulfuras, Hand of Ragnaros");
+            return _item.Name.IndexOf("ragnaros", StringComparison.CurrentCultureIgnoreCase) > -1;
+        }
+
+        public bool Conjured()
+        {
+            return _item.Name.IndexOf("conjured", StringComparison.CurrentCultureIgnoreCase) > -1;
         }
 
         public bool AgedItem()
         {
-            return _item.Name.Equals("Aged Brie");
+            return _item.Name.IndexOf("aged", StringComparison.CurrentCultureIgnoreCase) > -1;
         }
 
         public bool EventTicket()
         {
-            return _item.Name.Contains("Backstage");
+            return _item.Name.IndexOf("backstage", StringComparison.CurrentCultureIgnoreCase) > -1;
         }
 
         public int Quality()
@@ -119,6 +137,8 @@ namespace csharp
         bool EventTicket();
         bool AgedItem();
         bool Legendary();
+        bool Conjured();
+
         int Quality();
 
         IProduct WithReducedQuality();

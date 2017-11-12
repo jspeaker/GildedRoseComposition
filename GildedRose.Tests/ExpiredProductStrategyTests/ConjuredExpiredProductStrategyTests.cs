@@ -6,26 +6,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GildedRose.Tests.ExpiredProductStrategyTests
 {
     [TestClass]
-    public class DefaultExpiredProductStrategyTests
+    public class ConjuredExpiredProductStrategyTests
     {
         [TestMethod, TestCategory("Unit")]
-        public void ExpiredProductQualityShouldBeReducedByOne()
+        public void ExpiredProductQualityShouldBeReducedByTwo()
         {
-            Item item = new Item { Name = "Foo", SellIn = -1, Quality = 50 };
+            Item item = new Item { Name = "Conjured", SellIn = -1, Quality = 50 };
             IProduct product = new Product(item);
 
-            IExpiredProductStrategy defaultExpiredProductStrategy = new DefaultExpiredProductStrategy();
+            IExpiredProductStrategy defaultExpiredProductStrategy = new ConjuredExpiredProductStrategy();
             IProduct actual = defaultExpiredProductStrategy.Expired(product);
-            actual.Quality().Should().Be(49);
+            actual.Quality().Should().Be(48);
         }
 
         [TestMethod, TestCategory("Unit")]
         public void NonExpiredProductQualityShouldNotBeReduced()
         {
-            Item item = new Item { Name = "Foo", SellIn = 2, Quality = 50 };
+            Item item = new Item { Name = "Conjured", SellIn = 2, Quality = 50 };
             IProduct product = new Product(item);
 
-            IExpiredProductStrategy defaultExpiredProductStrategy = new DefaultExpiredProductStrategy();
+            IExpiredProductStrategy defaultExpiredProductStrategy = new ConjuredExpiredProductStrategy();
             IProduct actual = defaultExpiredProductStrategy.Expired(product);
             actual.Quality().Should().Be(50);
         }

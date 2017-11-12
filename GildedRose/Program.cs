@@ -34,7 +34,7 @@ namespace csharp
                     Quality = 49
                 },
                 // this conjured item does not work properly yet
-                new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+                new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 40}
             };
 
             GildedRose app = new GildedRose(items);
@@ -46,11 +46,13 @@ namespace csharp
                 Console.WriteLine("name, sellIn, quality");
                 foreach (Item item in items)
                 {
-                    System.Console.WriteLine(item.Name + ", " + item.SellIn + ", " + item.Quality);
+                    Console.WriteLine(item.Name + ", " + item.SellIn + ", " + item.Quality);
                 }
                 Console.WriteLine("");
                 app.UpdateQuality();
             }
+
+            Console.ReadLine();
         }
     }
 }

@@ -38,7 +38,7 @@ namespace GildedRose.Tests
         }
 
         [TestMethod, TestCategory("Unit")]
-        public void GivenCheeseItemWithQualityReduceQualityShouldNotReduceQualityOfProduct()
+        public void GivenAgedItemWithQualityReduceQualityShouldNotReduceQualityOfProduct()
         {
             Item item = new Item { Name = "Aged Brie", SellIn = 2, Quality = 1 };
             IProduct product = new Product(item);
@@ -48,7 +48,7 @@ namespace GildedRose.Tests
         }
 
         [TestMethod, TestCategory("Unit")]
-        public void GivenBackstagePassItemWithQualityReduceQualityShouldNotReduceQualityOfProduct()
+        public void GivenEventTicketItemWithQualityReduceQualityShouldNotReduceQualityOfProduct()
         {
             Item item = new Item { Name = "Backstage pass", SellIn = 2, Quality = 1 };
             IProduct product = new Product(item);

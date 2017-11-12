@@ -19,6 +19,17 @@ namespace GildedRose.Tests
         }
 
         [TestMethod, TestCategory("Unit")]
+        public void GivenConjuredExpiredItemShouldReduceQualityByTwo()
+        {
+            Item item = new Item { Name = "Conjured", SellIn = -1, Quality = 50 };
+            IProduct product = new Product(item);
+
+            IProduct actual = product.Expired();
+
+            actual.Quality().Should().Be(48);
+        }
+        
+        [TestMethod, TestCategory("Unit")]
         public void GivenCommonExpiredItemWithNoQualityShouldNotReduceQuality()
         {
             Item item = new Item { Name = "Foo", SellIn = -1, Quality = 0 };
