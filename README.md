@@ -2,9 +2,14 @@
 
 Gilded Rose C# refactor. 
 
-Composition > inheritance.
-Anthropomorphism.
+Composition.
+
+Anthropomorphic.
+
+Immutable.
+
 Micro-objects.
+
 
 ------------------------------------------------------------------------------------------------------
 
