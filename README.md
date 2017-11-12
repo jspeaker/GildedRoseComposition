@@ -1,3 +1,7 @@
 # GildedRoseComposition
 
-Gilded Rose C# refactor. Composition > inheritance.
+Gilded Rose C# refactor. 
+
+Composition > inheritance.
+Anthropomorphism.
+Micro-objects.
