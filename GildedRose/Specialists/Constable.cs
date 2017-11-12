@@ -1,15 +1,18 @@
-﻿namespace csharp.QualityAdjustmentStrategies
+﻿using csharp.Products;
+
+namespace csharp.Specialists
 {
-    public interface IQualityCop
+    public interface IConstable
     {
-        IProduct EnforceMaximum(IProduct product);
+        IProduct EnforceMaximumQuality(IProduct product);
     }
 
-    public class QualityCop : IQualityCop
+    public class Constable : IConstable
     {
-        public IProduct EnforceMaximum(IProduct product)
+        public IProduct EnforceMaximumQuality(IProduct product)
         {
             if (product.Quality() <= 50) return product;
+
             return new Product(new Item
             {
                 Name = product.Name(),

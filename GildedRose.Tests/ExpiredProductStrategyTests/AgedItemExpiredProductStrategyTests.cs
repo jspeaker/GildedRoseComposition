@@ -1,5 +1,5 @@
-﻿using csharp;
-using csharp.ExpiredProductStrategies;
+﻿using csharp.ExpiredProductStrategies;
+using csharp.Products;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

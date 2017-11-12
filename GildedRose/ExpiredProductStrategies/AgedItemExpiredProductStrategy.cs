@@ -1,19 +1,20 @@
-﻿using csharp.QualityAdjustmentStrategies;
+﻿using csharp.Products;
+using csharp.Specialists;
 
 namespace csharp.ExpiredProductStrategies
 {
     public class AgedItemExpiredProductStrategy : IExpiredProductStrategy
     {
         private readonly IExpiredProductStrategy _nextStrategy;
-        private readonly IQualityCop _qualityCop;
+        private readonly IConstable _constable;
         private readonly IProductBuilder _productBuilder;
 
-        public AgedItemExpiredProductStrategy() : this(new EventTicketExpiredProductStrategy(), new QualityCop(), new ProductBuilder()) { }
+        public AgedItemExpiredProductStrategy() : this(new EventTicketExpiredProductStrategy(), new Constable(), new ProductBuilder()) { }
 
-        public AgedItemExpiredProductStrategy(IExpiredProductStrategy nextStrategy, IQualityCop qualityCop, IProductBuilder productBuilder)
+        public AgedItemExpiredProductStrategy(IExpiredProductStrategy nextStrategy, IConstable constable, IProductBuilder productBuilder)
         {
             _nextStrategy = nextStrategy;
-            _qualityCop = qualityCop;
+            _constable = constable;
             _productBuilder = productBuilder;
         }
 
@@ -21,8 +22,7 @@ namespace csharp.ExpiredProductStrategies
         {
             if (!product.Aged()) return _nextStrategy.Expired(product);
 
-            return _qualityCop.EnforceMaximum(_productBuilder.Build(product.Name(), product.Quality() + 1, product.DaysToSell()));
-
+            return _constable.EnforceMaximumQuality(_productBuilder.Build(product.Name(), product.Quality() + 1, product.DaysToSell()));
         }
     }
 }

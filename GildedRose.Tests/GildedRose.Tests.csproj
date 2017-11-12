@@ -75,14 +75,17 @@
     <Compile Include="ExpiredProductStrategyTests\DefaultExpiredProductStrategyTests.cs" />
     <Compile Include="ExpiredProductStrategyTests\EventTicketExpiredProductStrategyTests.cs" />
     <Compile Include="ExpiredProductStrategyTests\NullExpiredProductStrategyTests.cs" />
-    <Compile Include="GildedRoseTest.cs" />
-    <Compile Include="ProductCommonTests.cs" />
-    <Compile Include="ProductConjuredTests.cs" />
-    <Compile Include="ProductEventTicketTests.cs" />
-    <Compile Include="ProductAgedItemTests.cs" />
-    <Compile Include="ProductExpiredTests.cs" />
-    <Compile Include="ProductLegendaryTests.cs" />
-    <Compile Include="ProductWithReducedSellInTests.cs" />
+    <Compile Include="Products\ProductLifeTests.cs" />
+    <Compile Include="Logging\LogTests.cs" />
+    <Compile Include="Products\InventoryTests.cs" />
+    <Compile Include="Products\ProductBuilderTests.cs" />
+    <Compile Include="Products\ProductCommonTests.cs" />
+    <Compile Include="Products\ProductConjuredTests.cs" />
+    <Compile Include="Products\ProductEventTicketTests.cs" />
+    <Compile Include="Products\ProductAgedItemTests.cs" />
+    <Compile Include="Products\ProductExpiredTests.cs" />
+    <Compile Include="Products\ProductLegendaryTests.cs" />
+    <Compile Include="Products\ProductWithReducedSellInTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QualityAdjustmentStrategyTests\QualityAdjustmentStrategyTests.cs" />
   </ItemGroup>

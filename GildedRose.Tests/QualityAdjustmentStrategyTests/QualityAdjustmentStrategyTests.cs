@@ -1,4 +1,4 @@
-﻿using csharp;
+﻿using csharp.Products;
 using csharp.QualityAdjustmentStrategies;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

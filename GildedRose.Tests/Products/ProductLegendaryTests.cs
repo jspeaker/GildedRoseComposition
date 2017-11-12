@@ -1,8 +1,8 @@
-﻿using csharp;
+﻿using csharp.Products;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace GildedRose.Tests
+namespace GildedRose.Tests.Products
 {
     [TestClass]
     public class ProductLegendaryTests

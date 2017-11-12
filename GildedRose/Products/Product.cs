@@ -2,7 +2,7 @@
 using csharp.ExpiredProductStrategies;
 using csharp.QualityAdjustmentStrategies;
 
-namespace csharp
+namespace csharp.Products
 {
     public class Product : IProduct
     {

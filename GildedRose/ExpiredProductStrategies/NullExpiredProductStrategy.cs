@@ -1,4 +1,6 @@
-﻿namespace csharp.ExpiredProductStrategies
+﻿using csharp.Products;
+
+namespace csharp.ExpiredProductStrategies
 {
     public class NullExpiredProductStrategy : IExpiredProductStrategy
     {

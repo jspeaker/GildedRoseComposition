@@ -1,4 +1,6 @@
-﻿namespace csharp.QualityAdjustmentStrategies
+﻿using csharp.Products;
+
+namespace csharp.QualityAdjustmentStrategies
 {
     public class NullQualityAdjustmentStrategy : IQualityAdjustmentStrategy
     {

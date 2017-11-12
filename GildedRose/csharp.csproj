@@ -68,10 +68,15 @@
     <Compile Include="ExpiredProductStrategies\IExpiredProductStrategy.cs" />
     <Compile Include="ExpiredProductStrategies\AgedItemExpiredProductStrategy.cs" />
     <Compile Include="ExpiredProductStrategies\NullExpiredProductStrategy.cs" />
-    <Compile Include="GildedRose.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="ProductBuilder.cs" />
+    <Compile Include="Products\ProductLife.cs" />
+    <Compile Include="Specialists\Illusionist.cs" />
+    <Compile Include="Logging\ConsoleWrapper.cs" />
+    <Compile Include="Logging\Log.cs" />
+    <Compile Include="Specialists\Scribe.cs" />
+    <Compile Include="Products\Inventory.cs" />
+    <Compile Include="Products\Item.cs" />
+    <Compile Include="Products\Product.cs" />
+    <Compile Include="Products\ProductBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QualityAdjustmentStrategies\AgedItemQualityAdjustmentStrategy.cs" />
@@ -80,7 +85,8 @@
     <Compile Include="QualityAdjustmentStrategies\EventTicketQualityAdjustmentStrategy.cs" />
     <Compile Include="QualityAdjustmentStrategies\IQualityAdjustmentStrategy.cs" />
     <Compile Include="QualityAdjustmentStrategies\NullQualityAdjustmentStrategy.cs" />
-    <Compile Include="QualityAdjustmentStrategies\QualityCop.cs" />
+    <Compile Include="Specialists\Constable.cs" />
+    <Compile Include="Specialists\ShopKeep.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -89,6 +95,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
