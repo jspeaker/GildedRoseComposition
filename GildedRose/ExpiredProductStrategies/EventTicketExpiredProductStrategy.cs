@@ -3,26 +3,23 @@
     public class EventTicketExpiredProductStrategy : IExpiredProductStrategy
     {
         private readonly IExpiredProductStrategy _nextStrategy;
+        private readonly IProductBuilder _productBuilder;
 
-        public EventTicketExpiredProductStrategy() : this(new ConjuredExpiredProductStrategy()) { }
+        public EventTicketExpiredProductStrategy() : this(new ConjuredExpiredProductStrategy(), new ProductBuilder()) { }
 
-        public EventTicketExpiredProductStrategy(IExpiredProductStrategy nextStrategy)
+        public EventTicketExpiredProductStrategy(IExpiredProductStrategy nextStrategy, IProductBuilder productBuilder)
         {
             _nextStrategy = nextStrategy;
+            _productBuilder = productBuilder;
         }
 
         public IProduct Expired(IProduct product)
         {
-            if (!product.EventTicket()) return _nextStrategy.Expired(product);
+            if (!product.Ticket()) return _nextStrategy.Expired(product);
 
             if (product.Quality() == 0) return product;
 
-            return new Product(new Item
-            {
-                Name = product.Item().Name,
-                Quality = 0,
-                SellIn = product.Item().SellIn
-            });
+            return _productBuilder.Build(product.Name(), 0, product.DaysToSell());
         }
     }
 }

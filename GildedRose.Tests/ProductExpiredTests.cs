@@ -13,7 +13,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Foo", SellIn = -1, Quality = 50 };
             IProduct product = new Product(item);
 
-            IProduct actual = product.Expired();
+            IProduct actual = product.WithExpirationAdjustment();
 
             actual.Quality().Should().Be(49);
         }
@@ -24,7 +24,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Conjured", SellIn = -1, Quality = 50 };
             IProduct product = new Product(item);
 
-            IProduct actual = product.Expired();
+            IProduct actual = product.WithExpirationAdjustment();
 
             actual.Quality().Should().Be(48);
         }
@@ -35,7 +35,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Foo", SellIn = -1, Quality = 0 };
             IProduct product = new Product(item);
 
-            IProduct actual = product.Expired();
+            IProduct actual = product.WithExpirationAdjustment();
 
             actual.Quality().Should().Be(0);
         }
@@ -46,7 +46,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Foo", SellIn = 0, Quality = 50 };
             IProduct product = new Product(item);
 
-            IProduct actual = product.Expired();
+            IProduct actual = product.WithExpirationAdjustment();
 
             actual.Quality().Should().Be(50);
         }
@@ -62,7 +62,7 @@ namespace GildedRose.Tests
             };
             Product product = new Product(item);
 
-            IProduct actual = product.Expired();
+            IProduct actual = product.WithExpirationAdjustment();
 
             actual.Quality().Should().Be(0);
         }
@@ -78,7 +78,7 @@ namespace GildedRose.Tests
             };
             IProduct product = new Product(item);
 
-            IProduct actual = product.Expired();
+            IProduct actual = product.WithExpirationAdjustment();
 
             actual.Quality().Should().Be(1);
         }
@@ -94,7 +94,7 @@ namespace GildedRose.Tests
             };
             IProduct product = new Product(item);
 
-            IProduct actual = product.Expired();
+            IProduct actual = product.WithExpirationAdjustment();
 
             actual.Quality().Should().Be(50);
         }
@@ -105,7 +105,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80 };
             IProduct product = new Product(item);
 
-            IProduct actual = product.Expired();
+            IProduct actual = product.WithExpirationAdjustment();
             actual.Quality().Should().Be(80);
         }
     }

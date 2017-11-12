@@ -1,5 +1,6 @@
 ﻿using System;
 using csharp.ExpiredProductStrategies;
+using csharp.QualityAdjustmentStrategies;
 
 namespace csharp
 {
@@ -7,60 +8,20 @@ namespace csharp
     {
         private readonly Item _item;
         private readonly IExpiredProductStrategy _expiredProductStrategyChain;
+        private readonly IQualityAdjustmentStrategy _qualityAdjustmentStrategyChain;
 
-        public Product(Item item) : this(item, new NullExpiredProductStrategy()) { }
+        public Product(Item item) : this(item, new NullExpiredProductStrategy(), new NullQualityAdjustmentStrategy()) { }
 
-        public Product(Item item, IExpiredProductStrategy expiredProductStrategyChain)
+        public Product(Item item, IExpiredProductStrategy expiredProductStrategyChain, IQualityAdjustmentStrategy qualityAdjustmentStrategyChain)
         {
             _item = item;
             _expiredProductStrategyChain = expiredProductStrategyChain;
+            _qualityAdjustmentStrategyChain = qualityAdjustmentStrategyChain;
         }
 
-        public IProduct WithReducedQuality()
+        public IProduct WithAdjustedQuality()
         {
-            if (_item.Quality < 1) return this;
-
-            if (Conjured())
-            {
-                return new Product(new Item
-                {
-                    Name = _item.Name,
-                    Quality = _item.Quality - 2,
-                    SellIn = _item.SellIn
-                });
-            }
-
-            if (!Common()) return this;
-
-            return new Product(new Item
-            {
-                Name = _item.Name,
-                Quality = _item.Quality - 1,
-                SellIn = _item.SellIn
-            });
-        }
-
-        public IProduct WithIncreasedQuality()
-        {
-            if (Common() && Quality() > 0) return this;
-            if (Quality() >= 50) return this;
-            if (Conjured()) return this;
-
-            return new Product(new Item
-            {
-                Name = _item.Name,
-                Quality = _item.Quality + 1,
-                SellIn = _item.SellIn
-            });
-        }
-
-        public IProduct EventTicketWithIncreasedQuality()
-        {
-            if (!EventTicket()) return this;
-            if (_item.Quality > 49) return this;
-            if (_item.SellIn > 10) return this;
-
-            return WithEventLooming(WithEventLooming(this, 10), 5);
+            return _qualityAdjustmentStrategyChain.Adjust(this);
         }
 
         public IProduct WithReducedSellIn()
@@ -75,22 +36,9 @@ namespace csharp
             });
         }
 
-        public IProduct Expired()
+        public IProduct WithExpirationAdjustment()
         {
             return _expiredProductStrategyChain.Expired(this);
-        }
-
-        private IProduct WithEventLooming(IProduct product, int daysInAdvance)
-        {
-            if (product.Item().SellIn > daysInAdvance) return product;
-            if (product.Item().Quality > 49) return product;
-
-            return new Product(new Item
-            {
-                Name = product.Item().Name,
-                Quality = product.Item().Quality + 1,
-                SellIn = product.Item().SellIn
-            });
         }
 
         public Item Item()
@@ -100,7 +48,7 @@ namespace csharp
 
         public bool Common()
         {
-            return !Legendary() && !AgedItem() && !EventTicket() && !Conjured();
+            return !Legendary() && !Aged() && !Ticket() && !Conjured();
         }
 
         public bool Legendary()
@@ -113,12 +61,12 @@ namespace csharp
             return _item.Name.IndexOf("conjured", StringComparison.CurrentCultureIgnoreCase) > -1;
         }
 
-        public bool AgedItem()
+        public bool Aged()
         {
             return _item.Name.IndexOf("aged", StringComparison.CurrentCultureIgnoreCase) > -1;
         }
 
-        public bool EventTicket()
+        public bool Ticket()
         {
             return _item.Name.IndexOf("backstage", StringComparison.CurrentCultureIgnoreCase) > -1;
         }
@@ -127,6 +75,16 @@ namespace csharp
         {
             return _item.Quality;
         }
+
+        public string Name()
+        {
+            return _item.Name;
+        }
+
+        public int DaysToSell()
+        {
+            return _item.SellIn;
+        }
     }
 
     public interface IProduct
@@ -134,17 +92,17 @@ namespace csharp
         Item Item();
 
         bool Common();
-        bool EventTicket();
-        bool AgedItem();
+        bool Ticket();
+        bool Aged();
         bool Legendary();
         bool Conjured();
 
+        string Name();
         int Quality();
+        int DaysToSell();
 
-        IProduct WithReducedQuality();
-        IProduct WithIncreasedQuality();
-        IProduct EventTicketWithIncreasedQuality();
+        IProduct WithAdjustedQuality();
         IProduct WithReducedSellIn();
-        IProduct Expired();
+        IProduct WithExpirationAdjustment();
     }
 }

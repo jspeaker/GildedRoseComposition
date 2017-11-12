@@ -1,6 +1,4 @@
-﻿using System.Runtime.Remoting.Lifetime;
-
-namespace csharp.ExpiredProductStrategies
+﻿namespace csharp.ExpiredProductStrategies
 {
     public class NullExpiredProductStrategy : IExpiredProductStrategy
     {
@@ -15,7 +13,7 @@ namespace csharp.ExpiredProductStrategies
 
         public IProduct Expired(IProduct product)
         {
-            if (product.Item().SellIn > -1 || product.Legendary() || product.Item().Quality <= 0 && !product.AgedItem()) return product;
+            if (product.DaysToSell() > -1 || product.Legendary() || product.Quality() <= 0 && !product.Aged()) return product;
 
             return _nextStrategy.Expired(product);
         }

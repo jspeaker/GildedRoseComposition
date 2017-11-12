@@ -23,7 +23,7 @@ namespace GildedRose.Tests.ExpiredProductStrategyTests
         }
 
         [TestMethod, TestCategory("Unit")]
-        public void GivenAgedItemExpiredProductWithMaxQualityStrategyShouldReturnSameObject()
+        public void GivenAgedItemExpiredProductWithMaxQualityStrategyShouldNotIncreaseQuality()
         {
             Item item = new Item { Name = "Aged Brie", SellIn = -1, Quality = 50 };
             IProduct product = new Product(item);
@@ -31,7 +31,19 @@ namespace GildedRose.Tests.ExpiredProductStrategyTests
             IExpiredProductStrategy agedItemExpiredProductStrategy = new AgedItemExpiredProductStrategy();
             IProduct actual = agedItemExpiredProductStrategy.Expired(product);
 
-            actual.Item().Should().Be(item);
+            actual.Quality().Should().Be(50);
+        }
+
+        [TestMethod, TestCategory("Unit")]
+        public void GivenAgedItemExpiredProductWithGreaterThanMaxQualityStrategyShouldReduceQualityToMax()
+        {
+            Item item = new Item { Name = "Aged Brie", SellIn = -1, Quality = 51 };
+            IProduct product = new Product(item);
+
+            IExpiredProductStrategy agedItemExpiredProductStrategy = new AgedItemExpiredProductStrategy();
+            IProduct actual = agedItemExpiredProductStrategy.Expired(product);
+
+            actual.Quality().Should().Be(50);
         }
     }
 }

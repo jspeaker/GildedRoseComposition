@@ -18,7 +18,7 @@ namespace GildedRose.Tests
             };
             Product product = new Product(item);
 
-            bool backstagePass = product.EventTicket();
+            bool backstagePass = product.Ticket();
             backstagePass.Should().BeTrue();
         }
 
@@ -33,7 +33,7 @@ namespace GildedRose.Tests
             };
             Product product = new Product(item);
 
-            bool backstagePass = product.EventTicket();
+            bool backstagePass = product.Ticket();
             backstagePass.Should().BeFalse();
         }
     }

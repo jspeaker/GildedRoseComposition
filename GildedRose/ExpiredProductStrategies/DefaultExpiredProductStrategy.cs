@@ -2,16 +2,20 @@
 {
     public class DefaultExpiredProductStrategy : IExpiredProductStrategy
     {
+        private readonly IProductBuilder _productBuilder;
+
+        public DefaultExpiredProductStrategy() : this(new ProductBuilder()) { }
+
+        public DefaultExpiredProductStrategy(IProductBuilder productBuilder)
+        {
+            _productBuilder = productBuilder;
+        }
+
         public IProduct Expired(IProduct product)
         {
-            if (product.Item().SellIn > -1) return product;
+            if (product.DaysToSell() > -1) return product;
 
-            return new Product(new Item
-            {
-                Name = product.Item().Name,
-                Quality = product.Quality() - 1,
-                SellIn = product.Item().SellIn
-            });
+            return _productBuilder.Build(product.Name(), product.Quality() - 1, product.DaysToSell());
         }
     }
 }

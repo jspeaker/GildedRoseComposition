@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace csharp
 {
@@ -33,15 +34,14 @@ namespace csharp
                     SellIn = 5,
                     Quality = 49
                 },
-                // this conjured item does not work properly yet
                 new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 40}
             };
 
-            GildedRose app = new GildedRose(items);
 
 
             for (int i = 0; i < 31; i++)
             {
+                GildedRose app = new GildedRose(items);
                 Console.WriteLine("-------- day " + i + " --------");
                 Console.WriteLine("name, sellIn, quality");
                 foreach (Item item in items)
@@ -49,7 +49,7 @@ namespace csharp
                     Console.WriteLine(item.Name + ", " + item.SellIn + ", " + item.Quality);
                 }
                 Console.WriteLine("");
-                app.UpdateQuality();
+                items = app.UpdateQuality().ToList();
             }
 
             Console.ReadLine();

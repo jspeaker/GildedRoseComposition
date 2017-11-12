@@ -5,25 +5,26 @@ namespace csharp
     public class GildedRose
     {
         private readonly IList<Item> _items;
+        private readonly IProductBuilder _productBuilder;
 
-        public GildedRose(IList<Item> items)
+        public GildedRose(IList<Item> items) : this(items, new ProductBuilder()) { }
+
+        public GildedRose(IList<Item> items, IProductBuilder productBuilder)
         {
             _items = items;
+            _productBuilder = productBuilder;
         }
 
-        public void UpdateQuality()
+        public IEnumerable<Item> UpdateQuality()
         {
             foreach (Item item in _items)
             {
-                IProduct product = new Product(item);
+                IProduct product = _productBuilder.Build(item.Name, item.Quality, item.SellIn)
+                    .WithAdjustedQuality()
+                    .WithReducedSellIn()
+                    .WithExpirationAdjustment();
 
-                item.Quality = product.WithReducedQuality().Quality();
-                item.Quality = product.WithIncreasedQuality().Quality();
-                item.Quality = product.EventTicketWithIncreasedQuality().Quality();
-
-                item.SellIn = product.WithReducedSellIn().Item().SellIn;
-
-                item.Quality = product.Expired().Quality();
+                yield return product.Item();
             }
         }
     }

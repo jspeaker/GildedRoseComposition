@@ -71,8 +71,16 @@
     <Compile Include="GildedRose.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Product.cs" />
+    <Compile Include="ProductBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QualityAdjustmentStrategies\AgedItemQualityAdjustmentStrategy.cs" />
+    <Compile Include="QualityAdjustmentStrategies\CommonQualityAdjustmentStrategy.cs" />
+    <Compile Include="QualityAdjustmentStrategies\ConjuredItemQualityAdjustmentStrategy.cs" />
+    <Compile Include="QualityAdjustmentStrategies\EventTicketQualityAdjustmentStrategy.cs" />
+    <Compile Include="QualityAdjustmentStrategies\IQualityAdjustmentStrategy.cs" />
+    <Compile Include="QualityAdjustmentStrategies\NullQualityAdjustmentStrategy.cs" />
+    <Compile Include="QualityAdjustmentStrategies\QualityCop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
