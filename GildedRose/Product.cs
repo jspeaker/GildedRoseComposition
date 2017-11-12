@@ -1,15 +1,21 @@
-﻿namespace csharp
+﻿using csharp.ExpiredProductStrategies;
+
+namespace csharp
 {
     public class Product : IProduct
     {
         private readonly Item _item;
+        private readonly IExpiredProductStrategy _expiredProductStrategyChain;
 
-        public Product(Item item)
+        public Product(Item item) : this(item, new NullExpiredProductStrategy()) { }
+
+        public Product(Item item, IExpiredProductStrategy expiredProductStrategyChain)
         {
             _item = item;
+            _expiredProductStrategyChain = expiredProductStrategyChain;
         }
 
-        public IProduct ReducedQualityProduct()
+        public IProduct WithReducedQuality()
         {
             if (_item.Quality < 1) return this;
             if (!Common()) return this;
@@ -22,7 +28,7 @@
             });
         }
 
-        public IProduct IncreasedQualityProduct()
+        public IProduct WithIncreasedQuality()
         {
             if (Common() && Quality() > 0) return this;
             if (Quality() >= 50) return this;
@@ -35,19 +41,33 @@
             });
         }
 
-        public IProduct IncreasedQualityBackstagePass()
+        public IProduct EventTicketWithIncreasedQuality()
         {
-            if (!BackstagePass()) return this;
+            if (!EventTicket()) return this;
             if (_item.Quality > 49) return this;
             if (_item.SellIn > 10) return this;
 
-            IProduct advanceBackstagePass = AdvanceBackstagePass(this, 10);
-            advanceBackstagePass = AdvanceBackstagePass(advanceBackstagePass, 5);
-
-            return advanceBackstagePass;
+            return WithEventLooming(WithEventLooming(this, 10), 5);
         }
 
-        private IProduct AdvanceBackstagePass(IProduct product, int daysInAdvance)
+        public IProduct WithReducedSellIn()
+        {
+            if (Legendary()) return this;
+
+            return new Product(new Item
+            {
+                Name = _item.Name,
+                Quality = _item.Quality,
+                SellIn = _item.SellIn - 1
+            });
+        }
+
+        public IProduct Expired()
+        {
+            return _expiredProductStrategyChain.Expired(this);
+        }
+
+        private IProduct WithEventLooming(IProduct product, int daysInAdvance)
         {
             if (product.Item().SellIn > daysInAdvance) return product;
             if (product.Item().Quality > 49) return product;
@@ -67,7 +87,7 @@
 
         public bool Common()
         {
-            return !Legendary() && !Cheese() && !BackstagePass();
+            return !Legendary() && !AgedItem() && !EventTicket();
         }
 
         public bool Legendary()
@@ -75,12 +95,12 @@
             return _item.Name.Equals("Sulfuras, Hand of Ragnaros");
         }
 
-        public bool Cheese()
+        public bool AgedItem()
         {
             return _item.Name.Equals("Aged Brie");
         }
 
-        public bool BackstagePass()
+        public bool EventTicket()
         {
             return _item.Name.Contains("Backstage");
         }
@@ -96,13 +116,15 @@
         Item Item();
 
         bool Common();
-        bool BackstagePass();
-        bool Cheese();
+        bool EventTicket();
+        bool AgedItem();
         bool Legendary();
         int Quality();
 
-        IProduct ReducedQualityProduct();
-        IProduct IncreasedQualityProduct();
-        IProduct IncreasedQualityBackstagePass();
+        IProduct WithReducedQuality();
+        IProduct WithIncreasedQuality();
+        IProduct EventTicketWithIncreasedQuality();
+        IProduct WithReducedSellIn();
+        IProduct Expired();
     }
 }

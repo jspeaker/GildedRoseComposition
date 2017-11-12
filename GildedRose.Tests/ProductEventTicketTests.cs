@@ -5,10 +5,10 @@ using FluentAssertions;
 namespace GildedRose.Tests
 {
     [TestClass]
-    public class ProductBackstagePassTests
+    public class ProductEventTicketTests
     {
         [TestMethod, TestCategory("Unit")]
-        public void GivenBackstagePassItemBackstagePassShouldReturnTrue()
+        public void GivenEventTicketShouldReturnTrue()
         {
             Item item = new Item
             {
@@ -18,12 +18,12 @@ namespace GildedRose.Tests
             };
             Product product = new Product(item);
 
-            bool backstagePass = product.BackstagePass();
+            bool backstagePass = product.EventTicket();
             backstagePass.Should().BeTrue();
         }
 
         [TestMethod, TestCategory("Unit")]
-        public void GivenNonBackstagePassBackstagePassShouldReturnFalse()
+        public void GivenNonEventTicketShouldReturnFalse()
         {
             Item item = new Item
             {
@@ -33,7 +33,7 @@ namespace GildedRose.Tests
             };
             Product product = new Product(item);
 
-            bool backstagePass = product.BackstagePass();
+            bool backstagePass = product.EventTicket();
             backstagePass.Should().BeFalse();
         }
     }

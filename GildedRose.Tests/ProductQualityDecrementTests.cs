@@ -13,7 +13,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Foo", SellIn = 2, Quality = 50 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.ReducedQualityProduct();
+            IProduct newProduct = product.WithReducedQuality();
             newProduct.Quality().Should().Be(49);
         }
 
@@ -23,7 +23,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Foo", SellIn = 2, Quality = 0 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.ReducedQualityProduct();
+            IProduct newProduct = product.WithReducedQuality();
             newProduct.Quality().Should().Be(0);
         }
 
@@ -33,7 +33,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.ReducedQualityProduct();
+            IProduct newProduct = product.WithReducedQuality();
             newProduct.Quality().Should().Be(80);
         }
 
@@ -43,7 +43,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Aged Brie", SellIn = 2, Quality = 1 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.ReducedQualityProduct();
+            IProduct newProduct = product.WithReducedQuality();
             newProduct.Quality().Should().Be(1);
         }
 
@@ -53,7 +53,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Backstage pass", SellIn = 2, Quality = 1 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.ReducedQualityProduct();
+            IProduct newProduct = product.WithReducedQuality();
             newProduct.Quality().Should().Be(1);
         }
     }

@@ -5,26 +5,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace GildedRose.Tests
 {
     [TestClass]
-    public class ProductCheeseTests
+    public class ProductAgedItemTests
     {
         [TestMethod, TestCategory("Unit")]
-        public void GivenCheeseItemCheeseShouldReturnTrue()
+        public void GivenAgedItemeShouldReturnTrue()
         {
             Item item = new Item { Name = "Aged Brie", SellIn = 2, Quality = 0 };
             IProduct product = new Product(item);
 
-            bool cheese = product.Cheese();
-            cheese.Should().BeTrue();
+            bool agedItem = product.AgedItem();
+            agedItem.Should().BeTrue();
         }
 
         [TestMethod, TestCategory("Unit")]
-        public void GivenNonCheeseItemCheeseShouldReturnTrue()
+        public void GivenNonAgedItemShouldReturnFalse()
         {
             Item item = new Item { Name = "Foo", SellIn = 0, Quality = 50 };
             IProduct product = new Product(item);
 
-            bool cheese = product.Cheese();
-            cheese.Should().BeFalse();
+            bool agedItem = product.AgedItem();
+            agedItem.Should().BeFalse();
         }
     }
 }

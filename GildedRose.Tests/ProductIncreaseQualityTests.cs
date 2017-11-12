@@ -13,7 +13,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Aged Brie", SellIn = 2, Quality = 1 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.IncreasedQualityProduct();
+            IProduct newProduct = product.WithIncreasedQuality();
             newProduct.Quality().Should().Be(2);
         }
 
@@ -23,7 +23,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Foo", SellIn = 2, Quality = 0 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.IncreasedQualityProduct();
+            IProduct newProduct = product.WithIncreasedQuality();
             newProduct.Quality().Should().Be(1);
         }
 
@@ -33,7 +33,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Aged Brie", SellIn = 2, Quality = 50 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.IncreasedQualityProduct();
+            IProduct newProduct = product.WithIncreasedQuality();
             newProduct.Quality().Should().Be(50);
         }
 
@@ -43,7 +43,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Backstage pass", SellIn = 11, Quality = 49 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.IncreasedQualityBackstagePass();
+            IProduct newProduct = product.EventTicketWithIncreasedQuality();
 
             newProduct.Quality().Should().Be(49);
         }
@@ -54,7 +54,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Backstage pass", SellIn = 10, Quality = 49 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.IncreasedQualityBackstagePass();
+            IProduct newProduct = product.EventTicketWithIncreasedQuality();
 
             newProduct.Quality().Should().Be(50);
         }
@@ -65,7 +65,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Backstage pass", SellIn = 5, Quality = 49 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.IncreasedQualityBackstagePass();
+            IProduct newProduct = product.EventTicketWithIncreasedQuality();
 
             newProduct.Quality().Should().Be(50);
         }
@@ -76,7 +76,7 @@ namespace GildedRose.Tests
             Item item = new Item { Name = "Backstage pass", SellIn = 5, Quality = 48 };
             IProduct product = new Product(item);
 
-            IProduct newProduct = product.IncreasedQualityBackstagePass();
+            IProduct newProduct = product.EventTicketWithIncreasedQuality();
 
             newProduct.Quality().Should().Be(50);
         }
