@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace csharp.Products
 {
@@ -11,13 +12,10 @@ namespace csharp.Products
     {
         public IEnumerable<IProduct> WithIncreasedAge(IEnumerable<IProduct> products)
         {
-            foreach (IProduct product in products)
-            {
-                yield return product
-                    .WithAdjustedQuality()
-                    .WithReducedSellIn()
-                    .WithExpirationAdjustment();
-            }
+            return products.Select(product => product
+                .WithAdjustedQuality()
+                .WithReducedSellIn()
+                .WithExpirationAdjustment());
         }
     }
 }

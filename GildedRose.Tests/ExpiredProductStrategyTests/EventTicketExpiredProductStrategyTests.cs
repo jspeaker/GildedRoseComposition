@@ -22,8 +22,8 @@ namespace GildedRose.Tests.ExpiredProductStrategyTests
             IExpiredProductStrategy eventTicketExpiredProductStrategy = new EventTicketExpiredProductStrategy();
             IProduct actual = eventTicketExpiredProductStrategy.Expired(product);
 
-            actual.Item().Name.Should().Be(item.Name);
-            actual.Item().SellIn.Should().Be(item.SellIn);
+            actual.Name().Should().Be(item.Name);
+            actual.DaysToSell().Should().Be(item.SellIn);
             actual.Quality().Should().Be(0);
         }
 
@@ -41,7 +41,7 @@ namespace GildedRose.Tests.ExpiredProductStrategyTests
             IExpiredProductStrategy eventTicketExpiredProductStrategy = new EventTicketExpiredProductStrategy();
             IProduct actual = eventTicketExpiredProductStrategy.Expired(product);
 
-            actual.Item().Should().Be(item);
+            actual.Should().Be(product);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace GildedRose.Tests.Products
 
             IProduct actual = product.WithReducedSellIn();
 
-            actual.Item().SellIn.Should().Be(4);
+            actual.DaysToSell().Should().Be(4);
         }
 
         [TestMethod, TestCategory("Unit")]
@@ -26,7 +26,7 @@ namespace GildedRose.Tests.Products
 
             IProduct actual = product.WithReducedSellIn();
 
-            actual.Item().SellIn.Should().Be(0);
+            actual.DaysToSell().Should().Be(0);
         }
     }
 }

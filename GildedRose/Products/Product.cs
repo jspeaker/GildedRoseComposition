@@ -41,11 +41,6 @@ namespace csharp.Products
             return _expiredProductStrategyChain.Expired(this);
         }
 
-        public Item Item()
-        {
-            return _item;
-        }
-
         public bool Common()
         {
             return !Legendary() && !Aged() && !Ticket() && !Conjured();
@@ -89,8 +84,6 @@ namespace csharp.Products
 
     public interface IProduct
     {
-        Item Item();
-
         bool Common();
         bool Ticket();
         bool Aged();

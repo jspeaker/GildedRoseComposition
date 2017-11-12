@@ -16,7 +16,7 @@ namespace GildedRose.Tests.ExpiredProductStrategyTests
 
             IExpiredProductStrategy nullExpiredProductStrategy = new NullExpiredProductStrategy();
             IProduct actual = nullExpiredProductStrategy.Expired(product);
-            actual.Item().Should().Be(item);
+            actual.Should().Be(product);
         }
     }
 }
