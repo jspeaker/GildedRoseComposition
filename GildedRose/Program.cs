@@ -8,7 +8,8 @@ namespace csharp
         public static void Main(string[] args)
         {
             new ShopKeep().Greet();
-            new Illusionist().CastAgeProducts(31);
+            new Accountant().WriteInventoryProjectionReport(31);
+
             Console.ReadLine();
         }
     }

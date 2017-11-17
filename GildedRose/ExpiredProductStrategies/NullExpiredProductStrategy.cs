@@ -15,9 +15,22 @@ namespace csharp.ExpiredProductStrategies
 
         public IProduct Expired(IProduct product)
         {
-            if (product.DaysToSell() > -1 || product.Legendary() || product.Quality() <= 0 && !product.Aged()) return product;
+            if (ProductExpirationMatters(product)) return _nextStrategy.Expired(product);
 
-            return _nextStrategy.Expired(product);
+            return product;
+        }
+
+        private bool ProductExpirationMatters(IProduct product)
+        {
+            if (product.DaysToSell() > -1) return false;
+            if (product.Legendary()) return false;
+
+            return !QualityHasBottomedOut(product);
+        }
+
+        private bool QualityHasBottomedOut(IProduct product)
+        {
+            return !product.Aged() && product.Quality() <= 0;
         }
     }
 }

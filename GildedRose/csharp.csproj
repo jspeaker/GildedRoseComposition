@@ -69,6 +69,7 @@
     <Compile Include="ExpiredProductStrategies\AgedItemExpiredProductStrategy.cs" />
     <Compile Include="ExpiredProductStrategies\NullExpiredProductStrategy.cs" />
     <Compile Include="Products\ProductLife.cs" />
+    <Compile Include="Specialists\Accountant.cs" />
     <Compile Include="Specialists\Illusionist.cs" />
     <Compile Include="Logging\ConsoleWrapper.cs" />
     <Compile Include="Logging\Log.cs" />
