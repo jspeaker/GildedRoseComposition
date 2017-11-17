@@ -22,13 +22,13 @@ namespace csharp.Specialists
 
         public void InscribeProductInformation(IEnumerable<IProduct> products, int day)
         {
-            _log.Print("-------- day " + day + " --------");
+            _log.Print($"-------- day {day} --------");
             _log.Print("name, sellIn, quality");
             foreach (IProduct product in products)
             {
-                _log.Print(product.Name() + ", " + product.DaysToSell() + ", " + product.Quality());
+                _log.Print($"{product.Name()}, {product.DaysToSell()}, {product.Quality()}");
             }
-            _log.Print("");
+            _log.Print(string.Empty);
         }
     }
 }

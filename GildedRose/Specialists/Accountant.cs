@@ -27,7 +27,7 @@ namespace csharp.Specialists
         public void WriteInventoryProjectionReport(int days)
         {
             IList<IProduct> products = _inventory.Products().ToList();
-            for (int day = 0; day < 31; day++)
+            for (int day = 0; day < days; day++)
             {
                 _scribe.InscribeProductInformation(products, day);
                 products = _illusionist.CastAgeProducts(products).ToList();
