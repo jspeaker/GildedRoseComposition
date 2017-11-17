@@ -1,5 +1,4 @@
-﻿using System;
-using csharp.Logging;
+﻿using csharp.Logging;
 
 namespace csharp.Specialists
 {
