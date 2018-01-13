@@ -11,10 +11,14 @@ namespace csharp.NonPlayerCharacters
     public class Scribe : IScribe
     {
         private readonly IInventory _inventory;
+        private readonly IParchment _parchment;
 
-        public Scribe(IInventory inventory)
+        public Scribe(IInventory inventory) : this(inventory, new Parchment()) { }
+
+        public Scribe(IInventory inventory, IParchment parchment)
         {
             _inventory = inventory;
+            _parchment = parchment;
         }
 
         public void LetItBeWritten(int day)
@@ -26,18 +30,31 @@ namespace csharp.NonPlayerCharacters
 
         private void WriteHeader(int day)
         {
-            Console.WriteLine("-------- day " + day + " --------");
-            Console.WriteLine("name, sellIn, quality");
+            _parchment.Inscribe("-------- day " + day + " --------");
+            _parchment.Inscribe("name, sellIn, quality");
         }
 
         private void WriteBody()
         {
-            _inventory.Products().ForEach(p => Console.WriteLine(p.ToString()));
+            _inventory.Products().ForEach(p => _parchment.Inscribe(p.ToString()));
         }
 
-        private static void WriteFooter()
+        private void WriteFooter()
         {
-            Console.WriteLine("");
+            _parchment.Inscribe("");
+        }
+    }
+
+    public interface IParchment
+    {
+        void Inscribe(string message);
+    }
+
+    public class Parchment : IParchment
+    {
+        public void Inscribe(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

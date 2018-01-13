@@ -1,5 +1,6 @@
 ﻿using csharp.Models;
 using csharp.Strategies;
+using csharp.tests.Fakes;
 using FluentAssertions;
 using NUnit.Framework;
 

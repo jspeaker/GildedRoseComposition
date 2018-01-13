@@ -1,6 +1,6 @@
 ﻿using csharp.Models;
 
-namespace csharp.tests
+namespace csharp.tests.Fakes
 {
     public static class FakeItem
     {

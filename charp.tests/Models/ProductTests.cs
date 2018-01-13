@@ -1,9 +1,10 @@
 ﻿using csharp.Models;
 using csharp.Strategies;
+using csharp.tests.Fakes;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace csharp.tests
+namespace csharp.tests.Models
 {
     [TestFixture]
     public class ProductTests
