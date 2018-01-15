@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Materials\IParchment.cs" />
     <Compile Include="Materials\Parchment.cs" />
     <Compile Include="NonPlayerCharacters\Banker.cs" />
     <Compile Include="NonPlayerCharacters\Scribe.cs" />
