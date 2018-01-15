@@ -1,5 +1,4 @@
-﻿using csharp.Data;
-using csharp.NonPlayerCharacters;
+﻿using csharp.NonPlayerCharacters;
 using csharp.tests.Fakes;
 using FluentAssertions;
 using NUnit.Framework;
@@ -10,22 +9,18 @@ namespace csharp.tests.NonPlayerCharacters
     public class ScribeTests
     {
         [Test, Category("Unit")]
-        public void ShouldInscribeProductInformationForTheSpecifiedDay()
+        public void ShouldInscribeMessage()
         {
             // arrange
-            IInventory fakeInventory = new FakeInventory();
+            const string message = "message";
             FakeParchment fakeParchment = new FakeParchment();
-            IScribe scribe = new Scribe(fakeInventory, fakeParchment);
+            IScrivener scrivener = new Scribe(fakeParchment);
 
             // act
-            scribe.LetItBeWritten(10);
+            scrivener.Inscribe(message);
 
             // assert
-            fakeParchment.Inscriptions.Should().HaveCount(4);
-            fakeParchment.Inscriptions[0].Should().Be("-------- day 10 --------");
-            fakeParchment.Inscriptions[1].Should().Be("name, sellIn, quality");
-            fakeParchment.Inscriptions[2].Should().Be(fakeInventory.Products()[0].ToString());
-            fakeParchment.Inscriptions[3].Should().Be(string.Empty);
+            fakeParchment.Inscriptions[0].Should().Be(message);
         }
     }
 }

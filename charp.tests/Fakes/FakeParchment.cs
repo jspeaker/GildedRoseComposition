@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using csharp.NonPlayerCharacters;
+﻿using csharp.Materials;
+using System.Collections.Generic;
 
 namespace csharp.tests.Fakes
 {

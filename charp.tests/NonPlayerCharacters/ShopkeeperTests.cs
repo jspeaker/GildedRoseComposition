@@ -1,5 +1,4 @@
 ﻿using csharp.NonPlayerCharacters;
-using csharp.tests.Fakes;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -12,14 +11,14 @@ namespace csharp.tests.NonPlayerCharacters
         public void ShouldGreet()
         {
             // arrange
-            FakeParchment fakeParchment = new FakeParchment();
-            IShopkeeper shopkeeper = new Shopkeeper(fakeParchment);
+            FakeScrivener fakeScrivener = new FakeScrivener();
+            IShopkeeper shopkeeper = new Shopkeeper(fakeScrivener);
 
             // act
             shopkeeper.Greet();
 
             // assert
-            fakeParchment.Inscriptions[0].Should().Be("OMGHAI!");
+            fakeScrivener.Messages[0].Should().Be("OMGHAI!");
         }
     }
 }

@@ -7,18 +7,18 @@
 
     public class Shopkeeper : IShopkeeper
     {
-        private readonly IParchment _parchment;
+        private readonly IScrivener _scrivener;
 
-        public Shopkeeper() : this(new Parchment()) { }
+        public Shopkeeper() : this(new Scribe()) { }
 
-        public Shopkeeper(IParchment parchment)
+        public Shopkeeper(IScrivener scrivener)
         {
-            _parchment = parchment;
+            _scrivener = scrivener;
         }
 
         public void Greet()
         {
-            _parchment.Inscribe("OMGHAI!");
+            _scrivener.Inscribe("OMGHAI!");
         }
     }
 }

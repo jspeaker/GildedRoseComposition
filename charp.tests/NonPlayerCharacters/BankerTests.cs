@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using csharp.NonPlayerCharacters;
-using NUnit.Framework;
+﻿using csharp.NonPlayerCharacters;
+using csharp.tests.Fakes;
 using FluentAssertions;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace csharp.tests.NonPlayerCharacters
 {
@@ -14,15 +15,15 @@ namespace csharp.tests.NonPlayerCharacters
         {
             // arrange
             FakeMage fakeMage = new FakeMage();
-            FakeScribe fakeScribe = new FakeScribe();
-            IBanker banker = new Banker( fakeMage, fakeScribe);
+            FakeScrivener fakeScrivener = new FakeScrivener();
+            IBanker banker = new Banker(fakeMage, fakeScrivener, new FakeInventory());
 
             // act
             banker.Report(10);
 
             // assert
             fakeMage.ProductsAged.Should().HaveCount(10);
-            fakeScribe.DaysWritten.Should().HaveCount(10);
+            fakeScrivener.Messages.Should().HaveCount(40);
         }
     }
 
@@ -36,13 +37,19 @@ namespace csharp.tests.NonPlayerCharacters
         }
     }
 
-    public class FakeScribe : IScribe
+    public class FakeScrivener : IScrivener
     {
         public List<int> DaysWritten = new List<int>();
+        public List<string> Messages = new List<string>();
 
         public void LetItBeWritten(int day)
         {
             DaysWritten.Add(day);
+        }
+
+        public void Inscribe(string message)
+        {
+            Messages.Add(message);
         }
     }
 }
