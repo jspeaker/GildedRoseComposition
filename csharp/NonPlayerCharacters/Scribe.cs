@@ -11,7 +11,7 @@ namespace csharp.NonPlayerCharacters
     {
         private readonly IParchment _parchment;
 
-        public Scribe() : this((IParchment) new Parchment()) { }
+        public Scribe() : this(new Parchment()) { }
 
         public Scribe(IParchment parchment)
         {

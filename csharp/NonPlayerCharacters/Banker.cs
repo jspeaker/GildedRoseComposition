@@ -13,9 +13,9 @@ namespace csharp.NonPlayerCharacters
         private readonly IScrivener _scrivener;
         private readonly IInventory _inventory;
 
-        public Banker() : this(new Inventory())  { }
+        public Banker() : this(new Inventory(), new Scribe())  { }
 
-        private Banker(IInventory inventory) : this(new Mage(inventory), new Scribe(), inventory) { }
+        private Banker(IInventory inventory, IScrivener scrivener) : this(new Mage(inventory), scrivener, inventory) { }
 
         public Banker(IMage mage, IScrivener scrivener, IInventory inventory)
         {
@@ -28,16 +28,28 @@ namespace csharp.NonPlayerCharacters
         {
             for (int day = 0; day < daysToReport; day++)
             {
-                _scrivener.Inscribe("-------- day " + day + " --------");
-                _scrivener.Inscribe("name, sellIn, quality");
-
-
-                _inventory.Products().ForEach(p => _scrivener.Inscribe(p.ToString()));
-
-                _scrivener.Inscribe(string.Empty);
+                WriteHeader(day);
+                WriteBody();
+                WriteFooter();
 
                 _mage.CastAgeProducts();
             }
+        }
+
+        private void WriteHeader(int day)
+        {
+            _scrivener.Inscribe($"-------- day {day} --------");
+            _scrivener.Inscribe("name, sellIn, quality");
+        }
+
+        private void WriteBody()
+        {
+            _inventory.Products().ForEach(p => _scrivener.Inscribe(p.ToString()));
+        }
+
+        private void WriteFooter()
+        {
+            _scrivener.Inscribe(string.Empty);
         }
     }
 }
